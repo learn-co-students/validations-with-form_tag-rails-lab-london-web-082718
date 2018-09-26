@@ -1,0 +1,36 @@
+<h2>Create an Post</h2>
+
+<% if @post.errors.any? %>
+<div id="error_explanation" style="color:red;" >
+  <h3>Please fix the following errors and re-submit:</h3>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_tag posts_path, method: "post" do %>
+  <div class="field <%=' field_with_errors' if @post.errors[:title].any? %> ">
+    <%= label_tag "name", "Name" %>
+    <%= text_field_tag "name" %>
+  </div>
+
+  <div class="field <%=' field_with_errors' if @post.errors[:content].any? %> ">
+    <%= label_tag "email", "Email" %>
+    <%= text_field_tag "email" %>
+  </div>
+
+  <div class="field <%=' field_with_errors' if @post.errors[:phone_number].any? %>">
+    <%= label_tag "phone_number", "Phone Number" %>
+    <%= text_field_tag "phone_number" %>
+  </div>
+
+  <div class="field <%=' field_with_errors' if @post.errors[:category].any? %>">
+    <%= label_tag "category", "Category" %>
+    <%= text_field_tag "category" %>
+  </div>
+
+  <%= submit_tag "Create" %>
+<% end %>
