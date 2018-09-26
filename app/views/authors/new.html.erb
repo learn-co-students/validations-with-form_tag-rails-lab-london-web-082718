@@ -1,18 +1,32 @@
 <h2>Create an Author</h2>
+
+
+<% if @author.errors.any? %>
+<div id="error_explanation" style="color:red;" >
+  <h3>Please fix the following errors and re-submit:</h3>
+  <ul>
+    <% @author.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<!-- With this in mind, we can use the invalid @person object to "re-fill" the usually-empty new form with the user's invalid entries. This way they don't have to re-type anything. -->
+
 <%= form_tag authors_path, method: "post" do %>
-  <div class="field">
+<div class="field<%= ' field_with_errors' if @author.errors[:name].any? %>">
     <%= label_tag "name", "Name" %>
-    <%= text_field_tag "name" %>
+    <%= text_field_tag "name", @author.name %>
   </div>
 
-  <div class="field">
+  <div class="field<%= ' field_with_errors' if @author.errors[:email].any? %>">
     <%= label_tag "email", "Email" %>
-    <%= text_field_tag "email" %>
+    <%= text_field_tag "email", @author.email %>
   </div>
 
-  <div class="field">
+  <div class="field<%= ' field_with_errors' if @author.errors[:phone_number].any? %>">
     <%= label_tag "phone_number", "Phone Number" %>
-    <%= text_field_tag "phone_number" %>
+    <%= text_field_tag "phone_number", @author.phone_number %>
   </div>
 
   <%= submit_tag "Create" %>
