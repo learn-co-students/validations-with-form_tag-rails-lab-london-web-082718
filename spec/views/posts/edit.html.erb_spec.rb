@@ -45,4 +45,3 @@ RSpec.describe "posts/edit", type: :feature do
     end
   end
 end
-
